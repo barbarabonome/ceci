@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 import requests
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -26,4 +27,5 @@ def get_status():
         return jsonify({"erro": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))  # Render usa a variável PORT
+    app.run(host='0.0.0.0', port=port)
